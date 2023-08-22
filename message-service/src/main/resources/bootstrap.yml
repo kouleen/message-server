@@ -1,0 +1,57 @@
+management:
+  health:
+    defaults:
+      enabled: false
+    db:
+      enabled: true
+    redis:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.client.serviceregistry.ServiceRegistryAutoConfiguration,org.springframework.cloud.client.serviceregistry.AutoServiceRegistrationAutoConfiguration
+  application:
+    name: message-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        # 是否启用配置中心
+        enabled: ${NACOS_CONFIG_ENABLED:true}
+        # 命名空间
+        namespace: ${NACOS_NAMESPACE:0b6c3562-5a16-411a-ba6a-c1401b93b7e0}
+        # 配置中心地址
+        server-addr: ${NACOS_SERVER_ADDR:minecraft.kouleen.cn:8848}
+        # 分组 默认DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        # 文件后缀visitor
+        file-extension: yaml
+        # 配置中心配置的 Data Id 无后缀的
+        shared-configs[0]:
+          dataId: message-server.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+      # 注册中心
+      discovery:
+        # 命名空间 默认空
+        namespace: ${NACOS_NAMESPACE:0b6c3562-5a16-411a-ba6a-c1401b93b7e0}
+        # 是否启用注册
+        register-enabled: ${SPRING_CLOUD_NACOS_DISCOVERY_REGISTER_ENABLED:true}
+        # 注册地址
+        server-addr: ${NACOS_SERVER_ADDR:minecraft.kouleen.cn:8848}
+      username: ${NACOS_USERNAME:kouleen}
+      password: ${NACOS_PASSWORD:zhangqing5240}
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLENT_SERVICE_URL:https://library.kouleen.cn/eureka}
+  instance:
+    prefer-ip-address: ${EUREKA.INSTANCE.PREFER-IP-ADDRESS:true}
+
