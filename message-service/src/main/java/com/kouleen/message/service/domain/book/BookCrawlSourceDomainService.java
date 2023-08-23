@@ -115,7 +115,6 @@ public class BookCrawlSourceDomainService {
                                                                 if (bookFictionHeader.getFictionName() == null || bookFictionHeader.getFictionAuthor() == null) {
                                                                     return;
                                                                 }
-                                                                System.out.printf("小说名称 %s 作者 %s%n",bookFictionHeader.getFictionName(),bookFictionHeader.getFictionAuthor());
                                                                 BookFictionHeader bookHeader = bookFictionHeaderService.findByFictionNameAndFictionAuthor(bookFictionHeader.getFictionName(),bookFictionHeader.getFictionAuthor());
                                                                 if(ObjectUtils.isEmpty(bookHeader)){
                                                                     bookFictionHeader.setFictionType(FictionTypeEnum.getFictionTypeName(id));
