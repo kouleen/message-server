@@ -3,7 +3,6 @@ package com.kouleen.message.service.infrastructure.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.convert.DbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
@@ -23,10 +22,5 @@ public class MongoConfiguration {
         MappingMongoConverter mappingMongoConverter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
         mappingMongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
         return mappingMongoConverter;
-    }
-
-    @Bean
-    public MongoTransactionManager mongoTransactionManager(MongoDatabaseFactory mongoDatabaseFactory){
-        return new MongoTransactionManager(mongoDatabaseFactory);
     }
 }
