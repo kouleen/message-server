@@ -21,4 +21,10 @@ public interface MessageConstant {
     String BOOK_FICTION_LINE = "BOOK_FICTION_LINE";
 
     String BOOK_FICTION_CONTENT = "BOOK_FICTION_CONTENT";
+
+    String UDP_CHANNEL = "UDP_CHANNEL";
+
+    String UDP_FILTER = "UDP_FILTER";
+
+    String UDP_ROUTER = "UDP_ROUTER";
 }
