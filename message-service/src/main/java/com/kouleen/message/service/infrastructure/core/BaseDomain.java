@@ -1,5 +1,8 @@
 package com.kouleen.message.service.infrastructure.core;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kouleen.message.api.infrastructure.constants.MessageConstant;
 import com.kouleen.message.api.infrastructure.core.Convertor;
@@ -28,25 +31,36 @@ public abstract class BaseDomain implements Convertor, Serializable {
     public static final String COL_UPDATE_ACCOUNT = "last_updated_account";
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     protected Long id;
 
+    @TableField(value = "`remark`")
     protected String remark;
 
+    @TableField(value = "`is_delete`")
     protected Integer isDelete;
 
+    @TableField(value = "`object_version_number`")
     protected Integer objectVersionNumber;
 
+    @TableField(value = "`creation_date`")
     protected Date creationDate;
 
+    @TableField(value = "`last_update_date`")
     protected Date lastUpdateDate;
 
+    @TableField(value = "`created_by`")
     protected Long createdBy;
 
+    @TableField(value = "`last_updated_by`")
     protected Long lastUpdatedBy;
 
+    @TableField(value = "`created_account`")
     protected String createdAccount;
 
+    @TableField(value = "`last_updated_account`")
     protected String lastUpdatedAccount;
+
 
     public Long getId() {
         return id;

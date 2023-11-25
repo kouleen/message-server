@@ -1,6 +1,11 @@
 package com.kouleen.message.service.domain.task;
 
+import com.alibaba.fastjson.JSON;
 import com.kouleen.message.api.interfaces.dto.TaskScheduledDTO;
+import com.kouleen.message.api.interfaces.vo.TaskIdentityVO;
+import com.kouleen.message.service.application.service.TaskIdentityService;
+import com.kouleen.message.service.domain.task.entity.TaskIdentity;
+import com.kouleen.message.service.interfaces.assembler.TaskIdentityAssembler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.Trigger;
@@ -24,6 +29,9 @@ import java.util.concurrent.Future;
 @Slf4j
 @Service
 public class TaskScheduledDomainService {
+
+    @Autowired
+    private TaskIdentityService taskIdentityService;
 
     @Autowired
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
@@ -55,6 +63,18 @@ public class TaskScheduledDomainService {
                 }
                 process.waitFor();
                 System.out.println(stringBuilder);
+                if("abed3341-b1c2-4b1d-b935-5751c0fcdd04".equals(taskScheduled.getTaskCode())){
+                    log.info("随机身份证号码 {}",stringBuilder);
+                    String respStr = stringBuilder.toString();
+                    TaskIdentityVO taskIdentityVO = JSON.parseObject(respStr, TaskIdentityVO.class);
+                    if("0".equals(taskIdentityVO.getCode())){
+                        TaskIdentity taskIdentity = TaskIdentityAssembler.toDO(taskIdentityVO);
+                        if(taskIdentityService.checkTaskIdentity(taskIdentity.getUserCode())){
+                            return;
+                        }
+                        taskIdentityService.createTaskIdentity(taskIdentity);
+                    }
+                }
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }

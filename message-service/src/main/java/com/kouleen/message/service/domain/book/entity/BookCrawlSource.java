@@ -9,9 +9,9 @@ import com.kouleen.message.service.infrastructure.core.BaseDomain;
  */
 public class BookCrawlSource  extends BaseDomain {
 
-    public static final String COL_dict_header_code = "dict_header_code";
-    public static final String COL_dict_line_code = "dict_line_code";
-    public static final String COL_source_status = "source_status";
+    public static final String COL_DICT_HEADER_CODE = "dict_header_code";
+    public static final String COL_DICT_LINE_CODE = "dict_line_code";
+    public static final String COL_SOURCE_STATUS = "source_status";
 
     private String dictHeaderCode;
 
