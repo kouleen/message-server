@@ -1,0 +1,5 @@
+run = "mvn spring-boot:run"
+language = "java"
+
+[debugger]
+program = "Main"
