@@ -1,4 +1,4 @@
-run = 'mkdir -p ${java.set.build.path} && mkdir -p ${java.set.classes.path} && javac -encoding UTF-8 -cp "$(find ${java.set.classes.path} -name *.jar -printf %p:)" -d ${java.set.build.path} ${java.set.build.options} $(find ${java.set.src.path} -name *.java) && java -Dfile.encoding=UTF-8 -cp "$(find ${java.set.classes.path} -name *.jar -printf %p:)${java.set.build.path}" ${java.set.main.class.path}'
+run = "mvn install;cd ./message-service;mvn spring-boot:run"
 language = "java"
 
 [debugger]
